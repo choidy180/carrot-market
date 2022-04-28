@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 const Upload: NextPage = () => {
   return (
-    <div className="px-4 py-16">
+    <div className="px-4 space-y-5 py-16">
       <div>
         <div className="
         w-full cursor-pointer text-gray-600 hover:text-orange-400 
@@ -29,34 +29,55 @@ const Upload: NextPage = () => {
         </label>
         </div>
       </div>
-      <div className="my-5">
-        <label htmlFor="price" className="mb-1 block text-sm font-medium text-gray-700">
-          Price
+      <div>
+        <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">
+          Name
         </label>
         <div className="rounded-md relative flex items-center shadow-sm">
-          <div className="absolute left-0 pl-3 flex items-center justify-center">
-            <span className="pointer-events-none text-gray-500 text-sm">$</span>
-          </div>
-          <input id="price"
+          <input 
+            id="name"
             className="
-            appearance-none pl-7 w-full px-3 py-2 border-gray-300 
-            rounded-md shadow-sm placeholder-gray-400 
-            focus:outline-none focus:ring-orange-400 focus:border-orange-400
+            appearance-none w-full px-3 py-2 border border-gray-300 rounded-md
+            shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-400
+            focus:border-orange-400
             "
-            type="text" 
-            placeholder="0.00" 
+            type="text"
+            required
           />
-          <div className="absolute pointer-events-none right-0 pr-3 flex items-center">
-            <span className="text-gray-500">USD</span>
-          </div>
         </div>
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">
-          Description
+         <label
+           className="mb-1 block text-sm font-medium text-gray-700"
+           htmlFor="price"
+        >
+          Price
         </label>
+        <div className="rounded-md relative flex  items-center shadow-sm">
+          <div className="absolute left-0 pointer-events-none pl-3 flex items-center justify-center">
+            <span className="text-gray-500 text-sm">$</span>
+          </div>
+          <input
+            id="price"
+            className="appearance-none pl-7 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+            type="text"
+            placeholder="0.00"
+          />
+          <div className="absolute right-0 pointer-events-none pr-3 flex items-center">
+            <span className="text-gray-500">USD</span>
+          </div>
+         </div>
+       </div>
+      <div>
+        <label 
+          htmlFor="description"
+          className="
+            mb-1 block text-sm font-medium text-gray-700
+          "
+        >Description</label>
         <div>
           <textarea 
+            id="description"
             className="
               mt-1 shadow-sm w-full focus:ring-2 focus:ring-orange-400 
               rounded-md border-gray-300 focus:border-orange-400
@@ -67,10 +88,9 @@ const Upload: NextPage = () => {
         </div>
       </div>
       <button className="
-        mt-4 bg-orange-400 hover:bg-orange-500 w-full
-      text-white py-2 px-4 border border-transparent 
-        rounded-md shadow-sm text-sm font-medium
-        focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus: outline-none
+        w-full bg-orange-400 text-white py-2 px-4 border-transparent
+        rounded-md shadow-sm text-sm font-medium hover:bg-orange-500
+        focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none
       ">Upload product</button>
     </div>
   );
