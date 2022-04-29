@@ -1,8 +1,10 @@
 import type { NextPage } from "next";
+import Layout from "../../components/layout";
 
  const ItemDetail: NextPage = () => {
    return (
-     <div className="px-4 py-10">
+    <Layout title="아이폰 14 ProMax" hasTabBar>
+      <div className="px-4 py-10">
        <div className="mb-8">
          <div className="h-96 bg-slate-200" />
          <div className="flex cursor-pointer py-3 border-t border-b items-center space-x-3">
@@ -13,8 +15,8 @@ import type { NextPage } from "next";
            </div>
          </div>
          <div className="mt-5">
-           <h1 className="text-3xl font-bold text-gray-900">Galaxy S50</h1>
-           <span className="text-2xl block mt-3 text-gray-900">$140</span>
+           <h1 className="text-3xl font-bold text-gray-900">아이폰 14 ProMax</h1>
+           <span className="text-2xl block mt-3 text-gray-900">$990</span>
            <p className="my-6 text-gray-700">
              My money&apos;s in that office, right? If she start giving me some
              bullshit about it ain&apos;t there, and we got to go someplace else
@@ -71,6 +73,7 @@ import type { NextPage } from "next";
          </div>
        </div>
      </div>
+    </Layout>
    );
  };
 
