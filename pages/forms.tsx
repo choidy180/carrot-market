@@ -1,65 +1,68 @@
-import React, { useState } from "react"
+import React from "react"
+import { FieldErrors, useForm } from "react-hook-form"
+
+interface LoginForm {
+  username: string;
+  password: string;
+  email: string;
+  errors?: string;
+}
 
 export default function Forms(){
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [formErrors, setFormErrors] = useState("");
-  const [emailError, setEmailError] = useState("");
-
-  const onUsernameChange = (event: React.SyntheticEvent<HTMLInputElement>)=>{
-    const { currentTarget : { value }, } = event;
-    setUsername(value);
-  };
-  const onEmailChange = (event: React.SyntheticEvent<HTMLInputElement>)=>{
-    const { currentTarget : { value }, } = event;
-    setEmailError("");
-    setEmail(value);
-  };
-  const onPasswordChange = (event: React.SyntheticEvent<HTMLInputElement>)=>{
-    const { currentTarget : { value }, } = event;
-    setPassword(value);
-  };
-  const onSubmit=(event:React.SyntheticEvent<HTMLFormElement>)=>{
-    event.preventDefault();
-    if (username === "" || email === "" || password === ""){
-      setFormErrors("All fields are required");
-    }
-    if(!email.includes("@")){
-
-    }
+  const {
+    register, 
+    handleSubmit,
+    formState: {errors},
+    watch,
+    setError,
+    setValue,
+    reset,
+    resetField,
+  } = useForm<LoginForm>({
+    mode: "onBlur"
+  });
+  const onValid = (data: LoginForm) => {
+    console.log("im valid bby");
   }
-  return(
-    <form className="flex flex-col w-full mt-24 space-y-10" onSubmit={onSubmit}>
+  const onInvalid = (errors: FieldErrors) => {
+    console.log(errors);
+  }
+  return (
+    <form className="flex flex-col w-1/2 mt-24 space-y-4 text-center" onSubmit={handleSubmit(onValid, onInvalid)}>
       <input 
-        value={username}
-        onChange={onUsernameChange}
+        {...register("username",{
+          required: "Username is required",
+          minLength : {
+            message: "The username should be longer than 5 chars.",
+            value: 5
+          },
+        })}
         type="text"
         placeholder="Username"
-        required
-        minLength={4}
       />
+      {errors.username?.message}
       <input 
-        value={email}
-        onChange={onEmailChange}
-        type="text" 
-        placeholder="Email" 
-        required
-        minLength={6}
+        {...register("email",{
+          required: "Email is required",
+          validate:{
+            notGmail:(value) => 
+              !value.includes("@gmail.com") || "Gmail is not allowed",
+          }
+        })}
+        type="text"
+        placeholder="Email"
+        className={`${Boolean(errors.email?.message) ? "" : "border-red-500"}`}
       />
-      <input 
-        value={password}
-        onChange={onPasswordChange}
-        type="password" 
-        placeholder="Password" 
-        required
-        minLength={6}
+      {errors.email?.message}
+      <input
+        {...register("password",{
+          required: "Password is required",
+        })}
+        type="password"
+        placeholder="Password"
       />
-      <input 
-        type="submit"
-        value="Create Account" 
-      />
+      {errors.password?.message}
+      <input type="submit" value="Create Account"/>
     </form>
   )
 }
