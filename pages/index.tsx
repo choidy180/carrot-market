@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Layout from "../components/layout";
-import "../libs/client/client";
+import Layout from "@components/layout";
+import "@libs/client/client";
  const Home: NextPage = () => {
    return (
      <Layout title="HOME" hasTabBar>
